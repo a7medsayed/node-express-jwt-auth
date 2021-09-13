@@ -124,6 +124,17 @@ beforeAll(() => {
     expect(body.validationErrors[field]).toBe(expectedMessage);
   });
 
+  it('return e-mail in use if email is used', async () => {
+
+    
+     await postUser();
+
+     const response = await postUser();
+ 
+     const body = response.body;
+     expect(body.validationErrors.email).toBe('e-mail in use');
+   });
+
 });
 
 describe('User login', () => {

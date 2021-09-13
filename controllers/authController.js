@@ -5,8 +5,9 @@ const userService = require("../services/userService");
 const authService = require("../services/authService");
 
 module.exports.signup_get = (req, res) => {
-  res.status(200).send();
+  
   res.render("signup");
+  res.status(200).send();
 };
 
 module.exports.login_get = (req, res) => {
@@ -36,8 +37,6 @@ module.exports.signup_post = async (req, res) => {
   });
 
   res.status(200).json(user);
-
-  //res.send('new signup');
 };
 
 module.exports.login_post = async (req, res) => {
@@ -49,7 +48,7 @@ module.exports.login_post = async (req, res) => {
       httpOnly: true,
       maxAge: authService.maxAge * 1000,
     });
-    res.status(200).json(user);
+    res.status(200).json({user:user._id});
 
     // res.send('user login');
   } catch (err) {
@@ -71,5 +70,5 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.logout_get = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
+  res.redirect("/login");
 };

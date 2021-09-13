@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const {userRoles} = require('../shared/enums')
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 6
+    },
+    role: {
+        type: String,
+        enum: userRoles,
+        required: true,
     },
 })
 

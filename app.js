@@ -5,7 +5,7 @@ const config = require("config");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const { requireAuth } = require("./middleware/authMiddleware");
+const { requireAuth , checkUser  , isAdmin} = require("./middleware/authMiddleware");
 
 const configDb = config.get("database");
 // middleware
@@ -28,8 +28,10 @@ mongoose
   .catch((err) => console.log(err));
 
 // routes
+app.get("*", checkUser);
 app.get("/", (req, res) => res.render("home"));
 app.get("/smoothies", requireAuth, (req, res) => res.render("smoothies"));
+app.get("/adminPage", requireAuth, isAdmin ,  (req, res) => res.render("adminPage"));
 app.use(authRoutes);
 
 module.exports = app;

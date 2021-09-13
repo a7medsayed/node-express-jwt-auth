@@ -1,5 +1,55 @@
 <%- include('partials/header'); -%>
+<form>
+<h2>sign up</h2>
+<label for="email">Email</label>
+<input type="text" name="email" required />
+<div class="email error"></div>
+<label for="password">Password</label>
+<input type="password" name="password" required />
+<div class="password error"></div>
+<label for="role">Role</label>
+<select name="role" class="combo">
+    <option value="admin">admin</option>
+    <option value="member">member</option>
+</select>
+<button>Sign Up</button>
+</form>
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
 
-<h1>sign up</h1>
+    form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+
+        //get the values
+        const email = form.email.value;
+        const password = form.password.value;
+        const role = form.role.value;
+       try{
+
+        const res = await fetch('/signup', {
+            method: 'POST',
+            body: JSON.stringify({email,password , role}),
+            headers: {'content-type' :'application/json'}
+        })
+        const data = await res.json();
+       
+        if(data.validationErrors)
+        {
+            emailError.textContent = data.validationErrors.email;
+            passwordError.textContent = data.validationErrors.password;
+        }
+        else
+        {
+            location.assign('/')
+        }
+       }
+       catch(err)
+       {
+
+       }
+    })
+</script>
 
 <%- include('partials/footer'); -%>

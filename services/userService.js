@@ -12,6 +12,11 @@ const saveUser = async (user) =>{
    return await  userEntity.create(user);
 }
 
+const findByEmail = async (email)=>
+{
+    const user  = await userEntity.findOne({email: email});
+    return user;
+}
 const login = async (user)=>
 {
     const savedUser  = await userEntity.findOne({email:user.email});
@@ -33,4 +38,4 @@ const login = async (user)=>
     }
 }
 
-module.exports = {saveUser , login};
+module.exports = {saveUser , login , findByEmail};
