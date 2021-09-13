@@ -7,6 +7,7 @@ This project is simple user authentication/authorization.
 * log user in (start user session)
 * log user out (end user session)
 * simple example of user roles and permissions (middleware)
+* simple client frontend included to test this services.
 
 # Pre-requisites
 - Install [Node.js](https://nodejs.org/en/) version 8.0.0
