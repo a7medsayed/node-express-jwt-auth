@@ -21,6 +21,7 @@ beforeAll(() => {
      
       email: 'user1@mail.com',
       password: 'password4P',
+      role: 'admin',
     };
     const postUser = (user = validUser) => {
       return request(app).post('/signup').send(user);
@@ -48,6 +49,7 @@ beforeAll(() => {
         
         email: null,
         password: 'password4P',
+        role: 'admin',
       });
   
       expect((await response).status).toBe(400);
@@ -58,6 +60,7 @@ beforeAll(() => {
         
         email: null,
         password: 'password4P',
+        role: 'admin',
       });
       const body = response.body;
       expect(body.validationErrors).not.toBeUndefined();
@@ -114,6 +117,7 @@ beforeAll(() => {
     const user = {
       email: 'user1@mail.com',
       password: 'password',
+      role: 'admin',
     };
 
     user[field] = value;
@@ -143,6 +147,7 @@ describe('User login', () => {
    
     email: 'user1@mail.com',
     password: 'password4P',
+    role: 'admin',
   };
   const postUser = (user = validUser) => {
     return request(app).post('/signup').send(user);
@@ -163,6 +168,7 @@ describe('User login', () => {
         
         email: null,
         password: 'password4P',
+        role: 'admin',
       }
     )
     const body = response.body;
@@ -180,6 +186,7 @@ describe('User login', () => {
         
         email: 'user1@mail.com',
         password: 'password4',
+        role: 'admin',
       }
     )
     const body = response.body;
@@ -194,6 +201,7 @@ describe('User login', () => {
         
         email: 'user1@mail.com',
         password: 'password4P',
+        role: 'admin',
       }
     )
     expect(response.status).toBe(200);
